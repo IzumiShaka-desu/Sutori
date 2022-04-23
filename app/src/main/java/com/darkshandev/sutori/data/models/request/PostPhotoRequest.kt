@@ -9,7 +9,6 @@ data class PostPhotoRequest(val description: String, val lat: Double?, val lon: 
 
 fun PostPhotoRequest.toPartMap(): Map<String, RequestBody> {
     val map: HashMap<String, RequestBody> = HashMap()
-    ;
     map["description"] = description.toRequestBody("multipart/form-data".toMediaTypeOrNull())
     if (lat != null && lon != null) {
         map["lat"] = lat.toString().toRequestBody("multipart/form-data".toMediaTypeOrNull())
