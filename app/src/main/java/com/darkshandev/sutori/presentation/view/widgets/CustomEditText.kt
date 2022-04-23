@@ -36,7 +36,7 @@ class CustomEditText : AppCompatEditText, TextWatcher {
     @DrawableRes
     private var drawableOptions: Int = R.drawable.ic_baseline_expand_more_24
     private var options: Array<String?>? = null
-    private var mAutoValidate: CustomEditText.OnValidationListener? = null
+    private var mAutoValidate: OnValidationListener? = null
 
     private fun init(context: Context, attrs: AttributeSet?) {
         if (attrs != null) {
@@ -117,7 +117,7 @@ class CustomEditText : AppCompatEditText, TextWatcher {
         setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
     }
 
-    fun setPickerOptions(options: Array<String?>?, listener: CustomEditText.OptionsListener?) {
+    fun setPickerOptions(options: Array<String?>?, listener: OptionsListener?) {
         if (options == null) {
             return
         }
@@ -125,12 +125,11 @@ class CustomEditText : AppCompatEditText, TextWatcher {
             AlertUtils.showPickerDialg(
                 context,
                 hint.toString(),
-                options,
-                DialogInterface.OnClickListener { dialog, which ->
-                    setText(options[which])
-                    listener?.onOptionSelected(this@CustomEditText, options[which])
-                }
-            )
+                options
+            ) { _, which ->
+                setText(options[which])
+                listener?.onOptionSelected(this@CustomEditText, options[which])
+            }
         }
     }
 
@@ -175,21 +174,11 @@ class CustomEditText : AppCompatEditText, TextWatcher {
                         val cache: Typeface = this.typeface
                         this.inputType =
                             InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-                        this.setTypeface(cache)
+                        this.typeface = cache
                     }
                 }
             }
         }
-    }
-
-    fun disablePickerMode() {
-        setOnClickListener(null)
-        isLongClickable = true
-        isClickable = false
-        isFocusable = true
-        isCursorVisible = true
-        removeDrawableOptions()
-        configureType(mFormatType)
     }
 
     interface OptionsListener {
@@ -223,7 +212,7 @@ class CustomEditText : AppCompatEditText, TextWatcher {
 
     fun getDrawableOptions(): Int {
         return drawableOptions
-    } //endregion
+    }
 
     val isValidField: Boolean
         get() = validateEditText(mFormatType, mCurrentString)

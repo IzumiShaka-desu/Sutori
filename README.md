@@ -7,23 +7,20 @@ course :
 
 ### Submission Checklists :
 
-  - [x] Menampilkan halaman login (Terpenuhi)
+  - [x] Mempertahankan Fitur dari Submission Sebelumnya (Terpenuhi)
 
-  - [x] Membuat halaman register (Terpenuhi)
+  - [x] Menampilkan daftar cerita dalam bentuk peta dengan benar.  (Terpenuhi)
 
-  - [x] Membuat Custom View berupa EditText (Terpenuhi)
+  - [x] Menampilkan list story dengan menggunakan Paging 3 dengan benar. (Terpenuhi)
 
-  - [x] Menyimpan data sesi dan token di preferences (Terpenuhi)
+  - [x] Menerapkan unit test pada fungsi yang ada di setiap ViewModel dan Repository. (Terpenuhi)
 
-  - [x] Terdapat fitur untuk logout  (Terpenuhi)
+  - [x] Menerapkan integration test pada salah satu fitur. (Terpenuhi)
+   
+  - [x] Menerapkan Idling Resources pada proses asynchronous. (Terpenuhi)
 
-  - [x] Menampilkan daftar cerita dari API (Terpenuhi)
+  - [x] Menuliskan skenario test (Terpenuhi)
 
-  - [x] Muncul halaman detail ketika salah satu item cerita ditekan (Terpenuhi)
 
-  - [x] Proses menambah cerita baru berhasil sesuai kriteria (Terpenuhi)
-
-  - [x] Membuat animasi pada aplikasi (Terpenuhi)
-
-mad scorecard : https://madscorecard.withgoogle.com/scorecard/share/4178433486/
-![summary](https://user-images.githubusercontent.com/65596335/164869746-c728607e-d9e6-4684-ba28-5c055c46c710.png)
+mad scorecard : https://madscorecard.withgoogle.com/scorecard/share/3199054634/
+<img width="1440" alt="Screen Shot 2022-04-23 at 10 46 58" src="https://user-images.githubusercontent.com/65596335/164874026-812ea77a-6d02-4338-aecc-885d3051513f.png">

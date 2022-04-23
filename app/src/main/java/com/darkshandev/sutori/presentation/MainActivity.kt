@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
             Manifest.permission.ACCESS_FINE_LOCATION
         )
         private const val REQUEST_CODE_PERMISSIONS = 10
-        private const val MY_PERMISSIONS_REQUEST_LOCATION = 99
 
     }
 

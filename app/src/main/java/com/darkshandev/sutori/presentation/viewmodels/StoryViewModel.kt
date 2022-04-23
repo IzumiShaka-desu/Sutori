@@ -3,6 +3,7 @@ package com.darkshandev.sutori.presentation.viewmodels
 import android.location.Location
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.darkshandev.sutori.data.models.NetworkResult
 import com.darkshandev.sutori.data.models.PostResponse
 import com.darkshandev.sutori.data.models.StoriesResponse
@@ -10,6 +11,7 @@ import com.darkshandev.sutori.data.models.Story
 import com.darkshandev.sutori.data.models.request.PostPhotoRequest
 import com.darkshandev.sutori.data.repositories.LocationRepository
 import com.darkshandev.sutori.data.repositories.StoryRepository
+import com.darkshandev.sutori.presentation.adapter.StoryPagedListAdapter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
@@ -23,6 +25,7 @@ class StoryViewModel @Inject constructor(
     private val repository: StoryRepository,
     private val locationRepository: LocationRepository
 ) : ViewModel() {
+
 
     private val _image = MutableStateFlow<File?>(null)
     val image = _image.asStateFlow()
@@ -68,7 +71,7 @@ class StoryViewModel @Inject constructor(
                 repository.postPhoto(selectedImage, userRequest).collect { result ->
                     _postResponse.update { result }
                     if (result is NetworkResult.Success) {
-                        fetchStories()
+                        adapterPagedList?.refresh()
                         this.coroutineContext.cancel()
                     }
                 }
@@ -86,21 +89,23 @@ class StoryViewModel @Inject constructor(
         MutableStateFlow<NetworkResult<PostResponse>>(NetworkResult.Initial())
     val postResponse = _postResponse.asStateFlow()
 
-    private val _stories = MutableStateFlow<NetworkResult<StoriesResponse>>(NetworkResult.Initial())
-    val stories = _stories.asStateFlow()
 
-    fun fetchStories() {
-        viewModelScope.launch {
-            repository.getStories().collect { result ->
-                _stories.update { result }
-                if (result is NetworkResult.Success) this.coroutineContext.cancel()
-            }
-        }
-    }
+    val storiesPaged = repository.getStoryPaged().cachedIn(viewModelScope)
+
 
     private val _selectedStory = MutableStateFlow<Story?>(null)
     val selectedStory = _selectedStory.asStateFlow()
     fun setSelectedPost(story: Story) = _selectedStory.update { story }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val storiesOnMap: StateFlow<NetworkResult<StoriesResponse>> =
+        repository.getStoriesOnMap().stateIn(
+            viewModelScope,
+            SharingStarted.Lazily,
+            NetworkResult.Loading()
+        )
+
+
+    var adapterPagedList: StoryPagedListAdapter? = null
 
 }

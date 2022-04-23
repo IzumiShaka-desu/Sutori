@@ -9,6 +9,7 @@ import com.darkshandev.sutori.data.models.request.PostPhotoRequest
 import com.darkshandev.sutori.data.models.request.toPartMap
 import com.darkshandev.sutori.data.network.StoryService
 import com.darkshandev.sutori.utils.ErrorUtils
+import com.darkshandev.sutori.utils.EspressoIdlingResource
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -24,7 +25,11 @@ interface RemoteStoryDatasource {
         photoRequest: PostPhotoRequest
     ): NetworkResult<PostResponse>
 
-    suspend fun getStories(): NetworkResult<StoriesResponse>
+    suspend fun getStories(
+        page: Int? = null,
+        size: Int? = null,
+        isLocationAvailable: Boolean? = false
+    ): NetworkResult<StoriesResponse>
 }
 
 class RemoteStoryDatasourceImpl @Inject constructor(
@@ -32,9 +37,15 @@ class RemoteStoryDatasourceImpl @Inject constructor(
     @ApplicationContext private val context: Context
 ) : RemoteStoryDatasource {
     private val service: StoryService = retrofit.create(StoryService::class.java)
-    override suspend fun getStories(): NetworkResult<StoriesResponse> =
+    private val idlingResources = EspressoIdlingResource
+
+    override suspend fun getStories(
+        page: Int?,
+        size: Int?,
+        isLocationAvailable: Boolean?
+    ): NetworkResult<StoriesResponse> =
         getResponse(context.getString(R.string.unable_fetch_stories)) {
-            service.getStory()
+            service.getStory(page, size, if (isLocationAvailable == true) 1 else null)
         }
 
     override suspend fun postImage(
@@ -62,6 +73,7 @@ class RemoteStoryDatasourceImpl @Inject constructor(
         request: suspend () -> Response<T>
 
     ): NetworkResult<T> {
+        idlingResources.increment()
         return try {
             val result = request.invoke()
             if (result.isSuccessful) {
@@ -81,6 +93,8 @@ class RemoteStoryDatasourceImpl @Inject constructor(
             }
         } catch (e: Throwable) {
             NetworkResult.Error(context.getString(R.string.error_request), null)
+        } finally {
+            idlingResources.decrement()
         }
     }
 

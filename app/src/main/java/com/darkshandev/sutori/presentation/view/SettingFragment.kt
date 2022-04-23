@@ -16,7 +16,6 @@ import androidx.navigation.fragment.findNavController
 import com.darkshandev.sutori.R
 import com.darkshandev.sutori.databinding.FragmentSettingBinding
 import com.darkshandev.sutori.presentation.viewmodels.UserViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 

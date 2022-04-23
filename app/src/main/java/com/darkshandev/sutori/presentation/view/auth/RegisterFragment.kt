@@ -17,7 +17,6 @@ import com.darkshandev.sutori.R
 import com.darkshandev.sutori.data.models.NetworkResult
 import com.darkshandev.sutori.databinding.FragmentRegisterBinding
 import com.darkshandev.sutori.presentation.viewmodels.UserViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class RegisterFragment : Fragment() {
@@ -61,7 +60,7 @@ class RegisterFragment : Fragment() {
                             activity?.window?.setFlags(
                                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
-                            );
+                            )
                         }
                         is NetworkResult.Success -> {
                             binding?.apply {

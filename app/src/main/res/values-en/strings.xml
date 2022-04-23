@@ -22,8 +22,7 @@
     <string name="name">Name</string>
     <string name="succes_register">Success register your account</string>
     <string name="session_expire">your session has ended, please login again</string>
-    <string name="user_post">image post</string>
-    <string name="succes_login">login sucess</string>
+    <string name="succes_login">login success</string>
     <string name="action_setting">setting</string>
     <string name="Create_A_Post">Create A Post</string>
     <string name="Setting">Setting</string>
@@ -39,4 +38,5 @@
     <string name="unable_post_photo">unable resolve login request, please try again</string>
     <string name="unauthorized_fetch">unable resolve request because your session has ended, please re-login!</string>
     <string name="change_locale">change locale</string>
+    <string name="retry">retry</string>
 </resources>

@@ -11,7 +11,7 @@ class AuthInterceptor(private val sessionService: SessionService) : Interceptor 
     override fun intercept(chain: Interceptor.Chain): Response {
         val req = chain.request()
         val basicReqBuilder = req.newBuilder()
-        var token: String? = null
+        var token: String?
         runBlocking { token = sessionService.getUser().first()?.token }
         if (token != null) basicReqBuilder.addHeader("Authorization", "Bearer $token")
         val basicReq = basicReqBuilder.build()

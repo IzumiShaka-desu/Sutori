@@ -1,5 +1,7 @@
 package com.darkshandev.sutori.data.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import okhttp3.internal.http.toHttpDateString
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -7,8 +9,10 @@ import java.util.*
 
 
 data class StoriesResponse(val error: Boolean, val message: String, val listStory: List<Story>)
+
+@Entity
 data class Story(
-    val id: String,
+    @PrimaryKey val id: String,
     val name: String,
     val description: String,
     val photoUrl: String,

@@ -19,7 +19,6 @@ import com.darkshandev.sutori.data.models.isExpire
 import com.darkshandev.sutori.databinding.FragmentLoginBinding
 import com.darkshandev.sutori.presentation.viewmodels.UserViewModel
 import com.darkshandev.sutori.utils.JWTUtils
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
@@ -75,7 +74,7 @@ class LoginFragment : Fragment() {
                             activity?.window?.setFlags(
                                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
-                            );
+                            )
                         }
                         is NetworkResult.Success -> {
                             binding?.apply {
@@ -118,7 +117,7 @@ class LoginFragment : Fragment() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
-//        supportActionBar?.hide()
+
     }
 
 
