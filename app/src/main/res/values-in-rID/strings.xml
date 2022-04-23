@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_story">buat postingan</string>
+    <string name="take_photo">ambil foto</string>
+    <string name="switch_camera">ganti kamera</string>
+    <string name="select_from_gallery">pilih dari galeri</string>
+    <string name="enable_location">aktifkan lokasi</string>
+    <string name="description">deskripsi</string>
+    <string name="retake_photo">ambil ulang photo</string>
+    <string name="send_post">kirim postingan</string>
+    <string name="preview_image">peninjauan gambar</string>
+    <string name="succes_upload">berhasil posting</string>
+    <string name="please_add_description">deskripsi diperlukan</string>
+    <string name="external_camera">kamera eksternal</string>
+    <string name="msg_empty_edittext">field kosong</string>
+    <string name="msg_invalid_edittext">field tidak valid</string>
+    <string name="message_welcome_page">bagikan cerita berharga anda</string>
+    <string name="title_welcome_page">selamat datang di  SutoriApp</string>
+    <string name="message_login_page">silahkan masukan informasi personal anda</string>
+    <string name="password">sandi</string>
+    <string name="title_signup_page">lengkapi personal info anda</string>
+    <string name="name">Nama</string>
+    <string name="succes_register">berhasil melakukan pendaftaran</string>
+    <string name="session_expire">sesi anda berakhir, silahkan login kembali</string>
+    <string name="user_post">post gambar</string>
+    <string name="succes_login">sukses login</string>
+    <string name="action_setting">pengaturan</string>
+    <string name="Create_A_Post">buat post</string>
+    <string name="Setting">Pengaturan</string>
+    <string name="required_field">lengkapi field yang dibutuhkan</string>
+    <string name="pick_photo">pilih gambar</string>
+    <string name="failed_pick_photo">gagal pilih gambar</string>
+    <string name="failed_get_camera">gagal ambil kamera</string>
+    <string name="auth_failed">autentikasi gagal, silahkan cek info personal anda</string>
+    <string name="error_request">gagal melakukan permintaan, silahkan ulangi</string>
+    <string name="unable_request_login">gagal melakukan permintaan, silahkan ulangi</string>
+    <string name="unable_request_register">gagal melakukan permintaan, silahkan ulangi</string>
+    <string name="unable_post_photo">gagal melakukan permintaan, silahkan ulangi</string>
+    <string name="unable_fetch_stories">gagal melakukan permintaan, silahkan ulangi</string>
+    <string name="unauthorized_fetch">gagal melakukan permintaan karena sesi anda berakhir, silahkan login kembali</string>
+    <string name="change_locale">ubah lokalisasi bahasa</string>
+</resources>

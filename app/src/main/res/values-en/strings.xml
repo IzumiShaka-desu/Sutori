@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_story">add story</string>
+    <string name="take_photo">take photo</string>
+    <string name="switch_camera">switch camera</string>
+    <string name="select_from_gallery">select from gallery</string>
+    <string name="enable_location">Enable Location</string>
+    <string name="description">Description</string>
+    <string name="retake_photo">retake photo</string>
+    <string name="send_post">Send Post</string>
+    <string name="preview_image">preview image</string>
+    <string name="succes_upload">Succes Post Your Image</string>
+    <string name="please_add_description">Description is Required!</string>
+    <string name="external_camera">external camera</string>
+    <string name="msg_empty_edittext">Empty Field</string>
+    <string name="msg_invalid_edittext">Invalid Field</string>
+    <string name="message_welcome_page">Share Your Precious Story</string>
+    <string name="title_welcome_page">Welcome to SutoriApp</string>
+    <string name="message_login_page">Please Input Your Personal Info</string>
+    <string name="password">password</string>
+    <string name="title_signup_page">Complete Your Personal Info</string>
+    <string name="name">Name</string>
+    <string name="succes_register">Success register your account</string>
+    <string name="session_expire">your session has ended, please login again</string>
+    <string name="user_post">image post</string>
+    <string name="succes_login">login sucess</string>
+    <string name="action_setting">setting</string>
+    <string name="Create_A_Post">Create A Post</string>
+    <string name="Setting">Setting</string>
+    <string name="required_field">please fill required field</string>
+    <string name="pick_photo">Choose a Picture</string>
+    <string name="failed_pick_photo">Failed to Pick Photo</string>
+    <string name="failed_get_camera">Failed to Get Camera</string>
+    <string name="auth_failed">authentication failed,please check you login info!</string>
+    <string name="error_request">Unable to complete your request, please try again</string>
+    <string name="unable_request_login">unable resolve login request, please try again</string>
+    <string name="unable_request_register">unable resolve login request, please try again</string>
+    <string name="unable_fetch_stories">unable resolve login request, please try again</string>
+    <string name="unable_post_photo">unable resolve login request, please try again</string>
+    <string name="unauthorized_fetch">unable resolve request because your session has ended, please re-login!</string>
+    <string name="change_locale">change locale</string>
+</resources>
