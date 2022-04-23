@@ -1,9 +1,6 @@
 package com.darkshandev.sutori.app.di
 
-import com.darkshandev.sutori.data.datasources.RemoteStoryDatasource
-import com.darkshandev.sutori.data.datasources.RemoteStoryDatasourceImpl
-import com.darkshandev.sutori.data.datasources.RemoteUserDataSources
-import com.darkshandev.sutori.data.datasources.RemoteUserDataSourcesImpl
+import com.darkshandev.sutori.data.datasources.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -17,4 +14,10 @@ interface DataModule {
 
     @Binds
     fun provideUserRemoteDatasourceImpl(datasource: RemoteUserDataSourcesImpl): RemoteUserDataSources
+
+    @Binds
+    fun provideSharedLocationManagerImpl(manager: SharedLocationManagerImpl): SharedLocationManager
+
+    @Binds
+    fun provideSessionServiceImpl(sessionService: SessionServiceImpl): SessionService
 }
