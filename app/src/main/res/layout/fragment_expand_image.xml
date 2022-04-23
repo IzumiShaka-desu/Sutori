@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="date"
+            type="String" />
+
+        <variable
+            name="story"
+            type="com.darkshandev.sutori.data.models.Story" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.view.ExpandImageFragment">
+
+        <ImageView
+            android:id="@+id/imageExpandView"
+            resname="@{story.photoUrl}"
+            android:layout_width="wrap_content"
+            isExpand="true"
+            android:transitionName="expand_image"
+            android:layout_height="wrap_content"
+            android:contentDescription="@{story.description}"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/nameDetailTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:paddingHorizontal="16dp"
+            android:text="@{story.name}"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintBottom_toTopOf="@+id/dateExpandTxt"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:srcCompat="@tools:sample/avatars"
+            tools:text="Akashaka" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="?colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nameDetailTxt" />
+
+        <TextView
+            android:id="@+id/dateExpandTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:text="@{date}"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            app:layout_constraintBottom_toTopOf="@+id/descExpandTxt"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:srcCompat="@tools:sample/avatars"
+            tools:text="thur,2022" />
+
+        <TextView
+            android:id="@+id/descExpandTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="16dp"
+            android:text="@{story.description}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:srcCompat="@tools:sample/avatars"
+            tools:text="Lorem Ipsum Dolor sit amet elit naruto sasuke" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
