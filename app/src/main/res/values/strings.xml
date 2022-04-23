@@ -28,23 +28,13 @@
     <string name="name">Name</string>
     <string name="succes_register">Success register your account</string>
     <string name="session_expire">your session has ended, please login again</string>
-    <string name="user_post">image post</string>
     <string name="succes_login">login success</string>
     <string name="action_setting">setting</string>
     <!-- Preference Titles -->
-    <string name="messages_header" translatable="false">Messages</string>
-    <string name="sync_header" translatable="false">Sync</string>
 
     <!-- Messages Preferences -->
-    <string name="signature_title" translatable="false">Your signature</string>
-    <string name="reply_title" translatable="false">Default reply action</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title" translatable="false">Sync email periodically</string>
-    <string name="attachment_title" translatable="false">Download incoming attachments</string>
-    <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
     <string name="Home" translatable="false">Home</string>
     <string name="Create_A_Post">Create A Post</string>
     <string name="Setting">Setting</string>
@@ -61,4 +51,6 @@
     <string name="unable_post_photo">unable to resolve post photo request,please try again</string>
     <string name="unauthorized_fetch">unable resolve request because your session has ended, please re-login!</string>
     <string name="change_locale">change locale</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="retry">retry</string>
 </resources>
