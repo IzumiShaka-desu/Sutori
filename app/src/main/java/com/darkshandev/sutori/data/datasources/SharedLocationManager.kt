@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.location.Location
 import android.os.Looper
 import android.util.Log
+import com.darkshandev.sutori.utils.EspressoIdlingResource
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -15,19 +16,20 @@ import kotlinx.coroutines.flow.callbackFlow
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class SharedLocationManager @Inject constructor(
+interface SharedLocationManager {
+    fun fetchUpdates(): Flow<Location>
+}
+
+class SharedLocationManagerImpl @Inject constructor(
     private val client: FusedLocationProviderClient
-) {
+) : SharedLocationManager {
+    private val idlingResources = EspressoIdlingResource
 
-
-    /**
-     * Status of location updates, i.e., whether the app is actively subscribed to location changes.
-     */
 
     @SuppressLint("MissingPermission")
     @OptIn(ExperimentalCoroutinesApi::class)
-    fun fetchUpdates(): Flow<Location> = callbackFlow {
-
+    override fun fetchUpdates(): Flow<Location> = callbackFlow {
+        idlingResources.increment()
         val locationRequest = LocationRequest.create().apply {
             interval = TimeUnit.SECONDS.toMillis(UPDATE_INTERVAL_SECS)
             fastestInterval = TimeUnit.SECONDS.toMillis(FASTEST_UPDATE_INTERVAL_SECS)
@@ -48,7 +50,7 @@ class SharedLocationManager @Inject constructor(
                 Log.d("error", it.toString())
             }
         awaitClose { client.removeLocationUpdates(callBack) }
-
+        idlingResources.decrement()
     }
 
     companion object {
