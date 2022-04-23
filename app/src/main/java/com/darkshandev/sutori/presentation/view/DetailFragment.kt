@@ -17,7 +17,6 @@ import com.darkshandev.sutori.R
 import com.darkshandev.sutori.data.models.formatDate
 import com.darkshandev.sutori.databinding.FragmentDetailBinding
 import com.darkshandev.sutori.presentation.viewmodels.StoryViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class DetailFragment : Fragment() {
