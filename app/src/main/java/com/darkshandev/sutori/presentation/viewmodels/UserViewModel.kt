@@ -9,17 +9,22 @@ import com.darkshandev.sutori.data.models.request.RegisterRequest
 import com.darkshandev.sutori.data.repositories.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class UserViewModel @Inject constructor(private val repository: UserRepository) : ViewModel() {
+
     val sessionUser = repository.getSession().stateIn(viewModelScope, SharingStarted.Lazily, null)
 
     private val _loginResponse =
         MutableStateFlow<NetworkResult<LoginResponse>>(NetworkResult.Initial())
     val loginResponse = _loginResponse
+
     fun loginBy(email: String, password: String) {
         viewModelScope.launch {
             repository.loginBy(email, password).collect { result ->
