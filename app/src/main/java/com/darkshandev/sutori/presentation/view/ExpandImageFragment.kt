@@ -13,7 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import com.darkshandev.sutori.data.models.formatDate
 import com.darkshandev.sutori.databinding.FragmentExpandImageBinding
 import com.darkshandev.sutori.presentation.viewmodels.StoryViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 
