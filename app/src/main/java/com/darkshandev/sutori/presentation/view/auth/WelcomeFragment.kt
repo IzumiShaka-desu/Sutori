@@ -18,7 +18,6 @@ import com.darkshandev.sutori.data.models.isExpire
 import com.darkshandev.sutori.databinding.FragmentWelcomeBinding
 import com.darkshandev.sutori.presentation.viewmodels.UserViewModel
 import com.darkshandev.sutori.utils.JWTUtils
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class WelcomeFragment : Fragment() {
@@ -83,11 +82,11 @@ class WelcomeFragment : Fragment() {
     }
 
     private fun setupAction() {
-        binding?.loginButton?.setOnClickListener {
+        binding?.loginWelcomeButton?.setOnClickListener {
             navController.navigate(R.id.welcome_navigate_to_login)
         }
 
-        binding?.signupButton?.setOnClickListener {
+        binding?.signupWelcomeButton?.setOnClickListener {
             navController.navigate(R.id.welcome_navigate_to_register)
         }
     }
@@ -101,9 +100,9 @@ class WelcomeFragment : Fragment() {
                 repeatMode = ObjectAnimator.REVERSE
             }.start()
 
-            val login = ObjectAnimator.ofFloat(loginButton, View.ALPHA, 1f).setDuration(500)
+            val login = ObjectAnimator.ofFloat(loginWelcomeButton, View.ALPHA, 1f).setDuration(500)
             val signup =
-                ObjectAnimator.ofFloat(signupButton, View.ALPHA, 1f).setDuration(500)
+                ObjectAnimator.ofFloat(signupWelcomeButton, View.ALPHA, 1f).setDuration(500)
             val title =
                 ObjectAnimator.ofFloat(titleTextView, View.ALPHA, 1f).setDuration(500)
             val desc = ObjectAnimator.ofFloat(descTextView, View.ALPHA, 1f).setDuration(500)
