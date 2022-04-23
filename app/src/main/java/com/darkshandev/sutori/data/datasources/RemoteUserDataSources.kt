@@ -9,6 +9,7 @@ import com.darkshandev.sutori.data.models.request.LoginRequest
 import com.darkshandev.sutori.data.models.request.RegisterRequest
 import com.darkshandev.sutori.data.network.UserService
 import com.darkshandev.sutori.utils.ErrorUtils
+import com.darkshandev.sutori.utils.EspressoIdlingResource
 import dagger.hilt.android.qualifiers.ApplicationContext
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -25,6 +26,8 @@ class RemoteUserDataSourcesImpl @Inject constructor(
 ) :
     RemoteUserDataSources {
     private val service = retrofit.create(UserService::class.java)
+    private val idlingResources = EspressoIdlingResource
+
     override suspend fun register(request: RegisterRequest): NetworkResult<PostResponse> =
         getResponse(context.getString(R.string.unable_request_register)) {
             service.register(request)
@@ -40,6 +43,7 @@ class RemoteUserDataSourcesImpl @Inject constructor(
         request: suspend () -> Response<T>
 
     ): NetworkResult<T> {
+        idlingResources.increment()
         return try {
             val result = request.invoke()
             if (result.isSuccessful) {
@@ -60,6 +64,8 @@ class RemoteUserDataSourcesImpl @Inject constructor(
             }
         } catch (e: Throwable) {
             NetworkResult.Error(context.getString(R.string.error_request), null)
+        } finally {
+            idlingResources.decrement()
         }
     }
 
