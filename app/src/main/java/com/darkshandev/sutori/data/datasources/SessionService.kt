@@ -12,10 +12,17 @@ import javax.inject.Inject
 
 private val Context.dataStore by preferencesDataStore("session")
 
-class SessionService @Inject constructor(@ApplicationContext appContext: Context) {
+interface SessionService {
+    fun getUser(): Flow<LoginResult?>
+    suspend fun saveUser(user: LoginResult)
+    suspend fun logout()
+}
+
+class SessionServiceImpl @Inject constructor(@ApplicationContext appContext: Context) :
+    SessionService {
     private val dataStore = appContext.dataStore
 
-    fun getUser(): Flow<LoginResult?> {
+    override fun getUser(): Flow<LoginResult?> {
         return dataStore.data.map {
             if (it[TOKEN_KEY] != null) LoginResult(
                 it[NAME_KEY] ?: "",
@@ -26,7 +33,7 @@ class SessionService @Inject constructor(@ApplicationContext appContext: Context
         }
     }
 
-    suspend fun saveUser(user: LoginResult) {
+    override suspend fun saveUser(user: LoginResult) {
         dataStore.edit { preferences ->
             preferences[NAME_KEY] = user.name
             preferences[UID_KEY] = user.userId
@@ -34,7 +41,7 @@ class SessionService @Inject constructor(@ApplicationContext appContext: Context
         }
     }
 
-    suspend fun logout() {
+    override suspend fun logout() {
         dataStore.edit {
             it.apply {
                 remove(NAME_KEY)
