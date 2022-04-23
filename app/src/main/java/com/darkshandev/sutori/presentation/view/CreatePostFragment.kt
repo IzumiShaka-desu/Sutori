@@ -29,10 +29,10 @@ import com.darkshandev.sutori.R
 import com.darkshandev.sutori.data.models.NetworkResult
 import com.darkshandev.sutori.databinding.FragmentCreatePostBinding
 import com.darkshandev.sutori.presentation.viewmodels.StoryViewModel
+import com.darkshandev.sutori.utils.EspressoIdlingResource
 import com.darkshandev.sutori.utils.createFile
 import com.darkshandev.sutori.utils.createTempFile
 import com.darkshandev.sutori.utils.uriToFile
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.concurrent.ExecutorService
@@ -100,7 +100,10 @@ class CreatePostFragment : Fragment() {
                 val chooser = Intent.createChooser(intent, getString(R.string.pick_photo))
                 launcherIntentGallery.launch(chooser)
             }
-            captureImage.setOnClickListener { takePhoto() }
+            captureImage.setOnClickListener {
+                EspressoIdlingResource.increment()
+                takePhoto()
+            }
             switchCamera.setOnClickListener {
                 cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
                     CameraSelector.DEFAULT_FRONT_CAMERA
@@ -128,7 +131,6 @@ class CreatePostFragment : Fragment() {
             val selectedImg: Uri = result.data?.data as Uri
 
             val myFile = uriToFile(selectedImg, requireContext())
-
             storyViewModel.setImage(myFile)
 
         }
@@ -253,13 +255,14 @@ class CreatePostFragment : Fragment() {
                             activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
                         }
                         is NetworkResult.Loading -> {
+                            EspressoIdlingResource.increment()
                             binding?.apply {
                                 progressBar.visibility = View.VISIBLE
                             }
                             activity?.window?.setFlags(
                                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
-                            );
+                            )
                         }
                         is NetworkResult.Success -> {
                             binding?.apply {
@@ -272,6 +275,7 @@ class CreatePostFragment : Fragment() {
                             ).show()
                             activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
                             activity?.onBackPressed()
+                            EspressoIdlingResource.decrement()
                         }
                         is NetworkResult.Error -> {
                             binding?.apply {
@@ -296,7 +300,9 @@ class CreatePostFragment : Fragment() {
                                 .load(it)
                                 .centerCrop()
                                 .into(previewImage)
+
                         }
+                        EspressoIdlingResource.decrement()
                     } else {
                         cameraExecutor = null
                         cameraExecutor = Executors.newSingleThreadExecutor()
